@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class ReadFile {
     BufferedReader bufferedReader;
+    int currentid;
     ReadFile(String fileName){
         FileReader fileReader = null;
         try {
@@ -33,15 +34,19 @@ public class ReadFile {
     
     ArrayList<Flashcards> readToCard() {
         ArrayList<Flashcards> flashCards = new ArrayList<Flashcards>();
-        String[] record = new String[5]; 
+        currentid = 1;
+        
+        String[] record = new String[6]; 
         String line = this.readLine();
+        
         while(line != null) {
             record = line.split(", ");
-            Flashcards flashCard = new Flashcards(record[0],record[1],Integer.parseInt(record[2]),Integer.parseInt(record[3]),record[4]);
+            Flashcards flashCard = new Flashcards(currentid, record[1], record[2], Integer.parseInt(record[3]), Integer.parseInt(record[4]),record[5]);
             flashCards.add(flashCard);
             line = this.readLine();
+            currentid ++;
         }
-        System.out.println("size:"+flashCards.size());
+
         return flashCards;
     }
     

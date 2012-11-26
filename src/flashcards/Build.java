@@ -74,6 +74,7 @@ public class Build extends JFrame {
                                // edition.
     private int editInterval;
     private int editSchedule;
+    private int id;
 
     private int editIndex;
     private String fileName;
@@ -109,8 +110,7 @@ public class Build extends JFrame {
         });
 
         button2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                System.out.println("aaa");
+            public void actionPerformed(ActionEvent arg0) {             
                 openFile();
                 editCard();
             }
@@ -241,6 +241,7 @@ public class Build extends JFrame {
      * This method is used to choose which card to edit.
      */
     public void editCard() {
+        
         this.remove(panel1);
         this.remove(panel2);
 
@@ -289,11 +290,12 @@ public class Build extends JFrame {
                         editAnswer = cards.get(i).answer;
                         editInterval = cards.get(i).interval;
                         editSchedule = cards.get(i).schedule;
+                        id = cards.get(i).id;
                         index = i;
                         break;
                     }
                 }
-                editDetails(editQuestion, editAnswer, editInterval,
+                editDetails(id, editQuestion, editAnswer, editInterval,
                         editSchedule, index);
             }
         });
@@ -311,14 +313,14 @@ public class Build extends JFrame {
      * @param index
      *            This method is used to edit the specific details of a card.
      */
-    public void editDetails(String question, String answer, int interval,
+    public void editDetails(int id, String question, String answer, int interval,
             int schedule, int index) {
 
         if (index == -1)
             JOptionPane.showMessageDialog(this,
                     "Please choose one card to edit.");
         else {
-
+            this.id = id;
             editIndex = index;
             this.remove(panel7);
             this.remove(panel6);
@@ -408,7 +410,7 @@ public class Build extends JFrame {
     }
 
     public void editResultListener() {
-        int id = -1;
+        int line = -1;
 
         for (int i = 0; i < searchResultList.size(); i++) {
             if (searchResultList.get(i).isSelected()) {
@@ -416,14 +418,15 @@ public class Build extends JFrame {
                 editAnswer = searchResults.get(i).answer;
                 editInterval = searchResults.get(i).interval;
                 editSchedule = searchResults.get(i).schedule;
-                id = index.get(i);
-                System.out.println("id:" + id);
+                id = searchResults.get(i).id;
+                line = index.get(i);
+              
                 break;
             }
         }
         this.remove(panel12);
         this.remove(searchCard);
-        editDetails(editQuestion, editAnswer, editInterval, editSchedule, id);
+        editDetails(id, editQuestion, editAnswer, editInterval, editSchedule, line);
     }
 
     public void addNewCardListener(ActionEvent event) {
@@ -468,14 +471,16 @@ public class Build extends JFrame {
      * @param event
      */
     public void editListener(ActionEvent event) {
-        // JOptionPane.showMessageDialog(this, "call edit listener");
+       // JOptionPane.showMessageDialog(this, "call edit listener");
+        System.out.println("id:"+id);
+        String idnow = ""+id;
         String[] cards = buildModel.obtainAllcards(fileName);
         String eQuestion = questionArea.getText();
         String eAnswer = answerArea.getText();
         String eInterval = intervalArea.getText();
         String eSchedule = scheduleArea.getText();
 
-        cards[editIndex] = eQuestion + ", " + eAnswer + ", " + eSchedule + ", "
+        cards[editIndex] = idnow +", "+ eQuestion + ", " + eAnswer + ", " + eSchedule + ", "
                 + eInterval + ", " + "d";
 
         buildModel.editUpdate(fileName, cards);

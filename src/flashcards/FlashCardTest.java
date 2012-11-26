@@ -17,7 +17,7 @@ public class FlashCardTest {
         String secondLine = "Capital of PA, Harrisburg, 2, 4, d";
         assertEquals(secondLine, rf.readLine());
     }
-    
+/*    
     @Test
     public void testReadToCards() {
         ReadFile rf = new ReadFile("/Users/mac/Documents/workspace/Flashcards/src/flashcards/example.txt");
@@ -47,7 +47,7 @@ public class FlashCardTest {
         wf.writeCardToFile(fl);
       }
     
-   
+   */
 
 }
 

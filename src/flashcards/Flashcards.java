@@ -7,7 +7,8 @@ public class Flashcards {
     int schedule;
     int interval;
     int id;
-    public Flashcards(String question, String answer) {
+    public Flashcards(int id, String question, String answer) {
+        this.id = id;
         this.question = question;
         this.answer = answer;
         this.level = "d";
@@ -16,8 +17,8 @@ public class Flashcards {
       
     }
     
-    public Flashcards(String question, String answer, int schedule, int interval, String level) {
-       // this.id = id;
+    public Flashcards(int id, String question, String answer, int schedule, int interval, String level) {
+        this.id = id;
         this.question = question;
         this.answer = answer;
         this.level = level;

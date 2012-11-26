@@ -13,7 +13,7 @@ public class BuildModel {
         int lineNum = readFile.countLine();
               
         flashCards = new ArrayList<Flashcards>();
-        Flashcards flashCard = new Flashcards(question, answer, lineNum + 1, 0, "d");
+        Flashcards flashCard = new Flashcards(lineNum + 1, question, answer, lineNum + 1, 0, "d");
         flashCards.add(flashCard);
         
         WriteFile wf = new WriteFile(fileName);
@@ -32,7 +32,8 @@ public class BuildModel {
         return false;
     }
     
-    public String[] obtainCards(String fileName) {     
+    public String[] obtainCards(String fileName) { 
+        System.out.println("enter");
         ArrayList<Flashcards> cards = new ArrayList<Flashcards>();  
         ReadFile readFile = new ReadFile(fileName);
         cards = readFile.readToCard();
@@ -41,7 +42,7 @@ public class BuildModel {
         for(int i = 0; i < cards.size(); i++) {
             cardDetail[i] = "Question: "+ cards.get(i).question + ", Answer: "+ cards.get(i).answer + 
                     ", schedule: "+cards.get(i).schedule + ", interval: " + cards.get(i).interval;
-       
+            System.out.println("card details:"+cardDetail[i]);
         }
         
         return cardDetail;
@@ -74,7 +75,7 @@ public class BuildModel {
         cards = readFile.readToCard();
         String[] allCards = new String[cards.size()];
         for(int i = 0; i < cards.size(); i++) {
-            allCards[i] = cards.get(i).question+", "+cards.get(i).answer+", "+cards.get(i).schedule+", "+cards.get(i).interval+", "+cards.get(i).level;
+            allCards[i] = cards.get(i).id + ", "+ cards.get(i).question+", "+cards.get(i).answer+", "+cards.get(i).schedule+", "+cards.get(i).interval+", "+cards.get(i).level;
         }
         return allCards;
     }

@@ -47,7 +47,7 @@ public class WriteFile {
     void writeCardToFile(ArrayList<Flashcards> flashCards) {
     try {
         for (int i= 0; i< flashCards.size();i++) {
-            String line = flashCards.get(i).question +", "+flashCards.get(i).answer +
+            String line = flashCards.get(i).id + ", "+ flashCards.get(i).question +", "+flashCards.get(i).answer +
                     ", "+flashCards.get(i).schedule+", "+flashCards.get(i).interval+
                     ", "+flashCards.get(i).level+"\n"; 
        
